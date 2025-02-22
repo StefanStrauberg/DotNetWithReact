@@ -1,2 +1,2 @@
 global using Microsoft.EntityFrameworkCore;
-global using Activity = Domain.Activity;
+global using Domain;
