@@ -6,6 +6,8 @@ builder.Services.AddDbContext<AppDbContext>(opt =>
   opt.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection"));
 });
 builder.Services.AddCors();
+builder.Services.AddMediatR(x => x.RegisterServicesFromAssemblyContaining<GetActivitiesList>());
+builder.Services.AddAutoMapper(typeof(MappingProfiles).Assembly);
 
 var app = builder.Build();
 
