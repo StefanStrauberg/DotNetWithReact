@@ -1,0 +1,168 @@
+{
+	"info": {
+		"_postman_id": "bc40ab2d-5750-4105-b02f-fbdd7e48a0c4",
+		"name": "Reactivites",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "16945597"
+	},
+	"item": [
+		{
+			"name": "Activities",
+			"item": [
+				{
+					"name": "Get Activities",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/activities",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"activities"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Activity",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/Activities/9083b41c-4285-4dc2-8f56-6fe21ce7e648",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"Activities",
+								"9083b41c-4285-4dc2-8f56-6fe21ce7e648"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Activity",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"var moment = require(\"moment\");\r",
+									"\r",
+									"pm.environment.set('activityDate', moment().add(100, 'days').toISOString());"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\": \"{{$randomCatchPhrase}}\",\r\n    \"date\": \"{{activityDate}}\",\r\n    \"description\": \"{{$randomLoremParagraph}}\",\r\n    \"category\": \"Culture\",\r\n    \"city\": \"{{$randomCity}}\",\r\n    \"venue\": \"{{$randomStreetName}}\",\r\n    \"latitude\": 51.496510900000004,\r\n    \"longitude\": -0.17600190725447445\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/Activities",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"Activities"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Edit Activity",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n        \"id\": \"bdc0c157-bbae-42a5-9608-d885326678ec\",\r\n        \"title\": \"Test activity updated 2\",\r\n        \"date\": \"2025-06-02T21:24:25.782\",\r\n        \"description\": \"Eum ratione est ad nobis voluptatem. Fugiat rerum iusto velit facere consequuntur et fugit. Aliquid perferendis repudiandae sit adipisci veritatis quia. Enim quod saepe veniam suscipit repudiandae.\",\r\n        \"category\": \"Culture\",\r\n        \"isCancelled\": false,\r\n        \"city\": \"Port Roberto\",\r\n        \"venue\": \"Jakubowski Run\",\r\n        \"latitude\": 51.496510900000004,\r\n        \"longitude\": -0.17600190725447445\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/Activities",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"Activities"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Activity",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/Activities/bdc0c157-bbae-42a5-9608-d885326678ec",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"Activities",
+								"bdc0c157-bbae-42a5-9608-d885326678ec"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "url",
+			"value": "http://localhost:5001",
+			"type": "string"
+		}
+	]
+}
