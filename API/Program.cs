@@ -5,6 +5,7 @@ builder.Services.AddDbContext<AppDbContext>(opt =>
 {
   opt.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection"));
 });
+builder.Services.AddCors();
 
 var app = builder.Build();
 
@@ -24,5 +25,9 @@ catch (Exception ex)
   var logger = services.GetRequiredService<ILogger<Program>>();
   logger.LogError(ex, "An error occured during migration.");
 }
+
+app.UseCors(x => x.AllowAnyOrigin()
+                  .AllowAnyHeader()
+                  .AllowAnyMethod());
 
 app.Run();
