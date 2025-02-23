@@ -1,4 +1,4 @@
-import { Container, CssBaseline } from "@mui/material";
+import { Box, Container, CssBaseline } from "@mui/material";
 import NavBar from "./NavBar";
 import ActivityDashboard from "../../features/activities/Dashboard/ActivityDashboard";
 import { useEffect, useState } from "react";
@@ -15,13 +15,13 @@ function App() {
   }, []);
 
   return (
-    <>
+    <Box sx={{ bgcolor: "#eeeeee" }}>
       <CssBaseline />
       <NavBar />
       <Container maxWidth="xl" sx={{ mt: 3 }}>
         <ActivityDashboard activities={activities} />
       </Container>
-    </>
+    </Box>
   );
 }
 
