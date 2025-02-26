@@ -16,6 +16,8 @@ function App() {
     axios
       .get<Activity[]>("http://localhost:5001/api/activities")
       .then((response) => setActivities(response.data));
+
+    return () => {};
   }, []);
 
   const handleSelectActivity = (id: string) => {
@@ -36,6 +38,21 @@ function App() {
     setEditMode(false);
   };
 
+  const handleSubmitForm = (activity: Activity) => {
+    console.log(activity);
+    if (activity.id) {
+      setActivities(
+        activities.map((x) => (x.id === activity.id ? activity : x))
+      );
+    } else {
+      const newActivity = { ...activity, id: activities.length.toString() };
+      setSelectedActivity(newActivity);
+      setActivities([...activities, newActivity]);
+    }
+    setEditMode(false);
+    console.log(activities);
+  };
+
   return (
     <Box sx={{ bgcolor: "#eeeeee" }}>
       <CssBaseline />
@@ -49,6 +66,7 @@ function App() {
           editMode={editMode}
           openForm={handleOpenForm}
           closeForm={handleFormClose}
+          submitForm={handleSubmitForm}
         />
       </Container>
     </Box>
