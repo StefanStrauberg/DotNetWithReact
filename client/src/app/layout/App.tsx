@@ -10,7 +10,7 @@ function App() {
   const [selectedActivity, setSelectedActivity] = useState<
     Activity | undefined
   >(undefined);
-  const [editMode, setEditMode] = useState(false);
+  const [editMode, setEditMode] = useState<boolean>(false);
 
   useEffect(() => {
     axios
@@ -39,7 +39,6 @@ function App() {
   };
 
   const handleSubmitForm = (activity: Activity) => {
-    console.log(activity);
     if (activity.id) {
       setActivities(
         activities.map((x) => (x.id === activity.id ? activity : x))
@@ -50,7 +49,6 @@ function App() {
       setActivities([...activities, newActivity]);
     }
     setEditMode(false);
-    console.log(activities);
   };
 
   return (

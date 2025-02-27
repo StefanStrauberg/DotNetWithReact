@@ -14,7 +14,7 @@ type Props = {
   openFrom: (id: string) => void;
 };
 
-export default function ActivityDetails({
+export default function ActivityDetail({
   activity,
   cancelSelectActivity,
   openFrom,
