@@ -16,21 +16,12 @@ export default function ActivityForm({
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const formData = new FormData(event.currentTarget);
-    console.log(event.currentTarget);
-    console.log(formData);
     const data: { [key: string]: FormDataEntryValue } = {};
     formData.forEach((value, key) => {
       data[key] = value;
     });
-    console.log(data);
-
     if (activity) data.id = activity.id;
-
-    console.log(data);
-
     submitForm(data as unknown as Activity);
-
-    console.log(data as unknown as Activity);
   };
 
   return (
