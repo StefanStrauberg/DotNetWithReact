@@ -1,14 +1,12 @@
 import { useQuery } from "@tanstack/react-query";
-import axios from "axios";
 import { Activity } from "../types/Activity";
+import agent from "../api/agent";
 
 export const useActivities = () => {
   const { data: activities, isPending } = useQuery({
     queryKey: ["activities"],
     queryFn: async () => {
-      const response = await axios.get<Activity[]>(
-        "http://localhost:5001/api/activities"
-      );
+      const response = await agent.get<Activity[]>("/activities");
       return response.data;
     },
   });
