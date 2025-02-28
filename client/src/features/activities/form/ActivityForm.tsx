@@ -22,6 +22,7 @@ export default function ActivityForm({
     });
     if (activity) data.id = activity.id;
     submitForm(data as unknown as Activity);
+    console.log(data as unknown as Activity);
   };
 
   return (
@@ -51,7 +52,7 @@ export default function ActivityForm({
         />
         <TextField name="date" type="date" defaultValue={activity?.date} />
         <TextField name="city" label="City" defaultValue={activity?.city} />
-        <TextField name="venu" label="Venu" defaultValue={activity?.venue} />
+        <TextField name="venue" label="Venu" defaultValue={activity?.venue} />
         <Box display="flex" justifyContent="end" gap={3}>
           <Button onClick={closeForm} color="inherit">
             Cancel
