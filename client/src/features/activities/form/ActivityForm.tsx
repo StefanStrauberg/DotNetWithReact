@@ -18,9 +18,10 @@ export default function ActivityForm({ activity, closeForm }: Props) {
     formData.forEach((value, key) => {
       data[key] = value;
     });
+
     if (activity) {
       data.id = activity.id;
-      await updateActivity.mutate(data as unknown as Activity);
+      await updateActivity.mutateAsync(data as unknown as Activity);
       closeForm();
     }
   };
