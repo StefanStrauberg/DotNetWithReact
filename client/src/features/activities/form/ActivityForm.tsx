@@ -51,7 +51,15 @@ export default function ActivityForm({ activity, closeForm }: Props) {
           label="Category"
           defaultValue={activity?.category}
         />
-        <TextField name="date" type="date" defaultValue={activity?.date} />
+        <TextField
+          name="date"
+          type="date"
+          defaultValue={
+            activity?.date
+              ? new Date(activity.date).toISOString().split("T")[0]
+              : new Date().toISOString().split("T")[0]
+          }
+        />
         <TextField name="city" label="City" defaultValue={activity?.city} />
         <TextField name="venue" label="Venu" defaultValue={activity?.venue} />
         <Box display="flex" justifyContent="end" gap={3}>
