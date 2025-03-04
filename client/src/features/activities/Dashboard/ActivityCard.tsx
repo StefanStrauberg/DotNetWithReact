@@ -12,12 +12,10 @@ import { useActivities } from "../../../lib/hooks/useActivities";
 
 type Props = {
   activity: Activity;
-  selectActivity: (id: string) => void;
 };
 
 export default function ActivityCard({
   activity,
-  selectActivity,
 }: Props) {
   const { deleteActivity } = useActivities();
 
@@ -39,7 +37,7 @@ export default function ActivityCard({
         <Chip label={activity.category} variant="outlined" />
         <Box display="flex" gap={3}>
           <Button
-            onClick={() => selectActivity(activity.id)}
+            onClick={() => {}}
             size="medium"
             variant="contained"
           >

@@ -3,13 +3,9 @@ import { Activity } from "../../../lib/types/Activity";
 import { FormEvent } from "react";
 import { useActivities } from "../../../lib/hooks/useActivities";
 
-type Props = {
-  activity?: Activity;
-  closeForm: () => void;
-};
-
-export default function ActivityForm({ activity, closeForm }: Props) {
+export default function ActivityForm() {
   const { updateActivity, createActivity } = useActivities();
+  const activity = {} as Activity;
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -22,10 +18,8 @@ export default function ActivityForm({ activity, closeForm }: Props) {
     if (activity) {
       data.id = activity.id;
       await updateActivity.mutateAsync(data as unknown as Activity);
-      closeForm();
     } else {
       await createActivity.mutateAsync(data as unknown as Activity);
-      closeForm();
     }
   };
 
@@ -66,7 +60,7 @@ export default function ActivityForm({ activity, closeForm }: Props) {
         <TextField name="city" label="City" defaultValue={activity?.city} />
         <TextField name="venue" label="Venu" defaultValue={activity?.venue} />
         <Box display="flex" justifyContent="end" gap={3}>
-          <Button onClick={closeForm} color="inherit">
+          <Button color="inherit">
             Cancel
           </Button>
           <Button
