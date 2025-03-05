@@ -60,9 +60,7 @@ export default function ActivityForm() {
         <TextField name="city" label="City" defaultValue={activity?.city} />
         <TextField name="venue" label="Venu" defaultValue={activity?.venue} />
         <Box display="flex" justifyContent="end" gap={3}>
-          <Button color="inherit">
-            Cancel
-          </Button>
+          <Button color="inherit">Cancel</Button>
           <Button
             type="submit"
             color="success"

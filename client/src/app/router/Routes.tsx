@@ -6,14 +6,14 @@ import ActivityForm from "../../features/activities/form/ActivityForm";
 import ActivityDetail from "../../features/activities/details/ActivityDetail";
 
 export const router = createBrowserRouter([
-    {
-        path: '/',
-        element: <App />, 
-        children: [
-            { path: '', element:<HomePage /> },
-            { path: 'activities', element:<ActivityDashboard /> },
-            { path: 'activities/:id', element:<ActivityDetail /> },
-            { path: 'createActivity', element:<ActivityForm /> }
-        ]
-    }
-])
+  {
+    path: "/",
+    element: <App />,
+    children: [
+      { path: "", element: <HomePage /> },
+      { path: "activities", element: <ActivityDashboard /> },
+      { path: "activities/:id", element: <ActivityDetail /> },
+      { path: "createActivity", element: <ActivityForm /> },
+    ],
+  },
+]);

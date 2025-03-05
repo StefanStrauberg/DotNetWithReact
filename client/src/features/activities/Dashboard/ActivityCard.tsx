@@ -15,9 +15,7 @@ type Props = {
   activity: Activity;
 };
 
-export default function ActivityCard({
-  activity,
-}: Props) {
+export default function ActivityCard({ activity }: Props) {
   const { deleteActivity } = useActivities();
 
   return (
@@ -38,8 +36,13 @@ export default function ActivityCard({
         <Chip label={activity.category} variant="outlined" />
         <Box display="flex" gap={3}>
           <Button
-            component={Link} to={`/activities/${activity.id}`} size="medium"
-            variant="contained" >View</Button>
+            component={Link}
+            to={`/activities/${activity.id}`}
+            size="medium"
+            variant="contained"
+          >
+            View
+          </Button>
           <Button
             color="error"
             onClick={() => deleteActivity.mutate(activity.id)}

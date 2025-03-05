@@ -23,7 +23,11 @@ export default function NavBar() {
         <Container maxWidth="xl">
           <Toolbar sx={{ display: "flex", justifyContent: "space-between" }}>
             <Box>
-              <MenuItem component={NavLink} to='/' sx={{ display: "flex", gap: 2 }}>
+              <MenuItem
+                component={NavLink}
+                to="/"
+                sx={{ display: "flex", gap: 2 }}
+              >
                 <Group fontSize="large" />
                 <Typography variant="h4" fontWeight="bold">
                   Reactivities
@@ -31,16 +35,12 @@ export default function NavBar() {
               </MenuItem>
             </Box>
             <Box sx={{ display: "flex" }}>
-              <MenuItemLinks to='/activities' >
-                Activities
-              </MenuItemLinks>
-              <MenuItemLinks to='/createActivity' >
+              <MenuItemLinks to="/activities">Activities</MenuItemLinks>
+              <MenuItemLinks to="/createActivity">
                 Create activity
               </MenuItemLinks>
             </Box>
-            <MenuItem>
-                User menu
-            </MenuItem>
+            <MenuItem>User menu</MenuItem>
           </Toolbar>
         </Container>
       </AppBar>
