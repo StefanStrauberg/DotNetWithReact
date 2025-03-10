@@ -19,6 +19,7 @@ export const useActivities = (id?: string) => {
       const response = await agent.get<Activity>(`/activities/${id}`);
       return response.data;
     },
+    enabled: !!id,
   });
 
   const updateActivity = useMutation({
