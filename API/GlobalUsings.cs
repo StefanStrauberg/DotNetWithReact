@@ -6,3 +6,4 @@ global using MediatR;
 global using Persistence;
 global using Application.Core;
 global using Application.Activities.Commands;
+global using Application.Activities.DTOs;
