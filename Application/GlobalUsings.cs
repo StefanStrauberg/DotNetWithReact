@@ -4,4 +4,5 @@ global using Persistence;
 global using Microsoft.EntityFrameworkCore;
 global using AutoMapper;
 global using Application.Activities.DTOs;
-global using System.ComponentModel.DataAnnotations;
+global using Application.Activities.Commands;
+global using FluentValidation;
