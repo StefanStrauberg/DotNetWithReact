@@ -1,16 +1,35 @@
+var policyName = "_myAllowSpecificOrigins";
 var builder = WebApplication.CreateBuilder(args);
 
+// Add services to the container.
 builder.Services.AddControllers();
 builder.Services.AddDbContext<AppDbContext>(opt =>
 {
   opt.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection"));
 });
-builder.Services.AddCors();
-builder.Services.AddMediatR(x => x.RegisterServicesFromAssemblyContaining<GetActivitiesList>());
+builder.Services.AddCors(options => 
+{
+  options.AddPolicy(policyName,
+                    builder => 
+                    {
+                      builder.WithOrigins("http://localhost:3000")
+                             .AllowAnyMethod()
+                             .AllowAnyHeader();
+                    });
+});
+builder.Services.AddMediatR(x => {
+  x.RegisterServicesFromAssemblyContaining<GetActivitiesList>();
+  x.AddOpenBehavior(typeof(ValidationBehavior<,>));
+});
 builder.Services.AddAutoMapper(typeof(MappingProfiles).Assembly);
 builder.Services.AddValidatorsFromAssemblyContaining<CreateActivityValidator>();
+builder.Services.AddTransient<ExceptionMiddleware>();
 
 var app = builder.Build();
+
+// Configure the HTTP request pipeline
+app.UseMiddleware<ExceptionMiddleware>();
+app.UseCors(policyName);
 
 app.MapControllers();
 
@@ -28,9 +47,5 @@ catch (Exception ex)
   var logger = services.GetRequiredService<ILogger<Program>>();
   logger.LogError(ex, "An error occured during migration.");
 }
-
-app.UseCors(x => x.AllowAnyOrigin()
-                  .AllowAnyHeader()
-                  .AllowAnyMethod());
 
 app.Run();

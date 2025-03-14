@@ -9,3 +9,4 @@ global using Application.Activities.Commands;
 global using Application.Activities.DTOs;
 global using Application.Activities.Validations;
 global using FluentValidation;
+global using API.Middleware;
