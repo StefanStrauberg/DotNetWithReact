@@ -10,3 +10,4 @@ global using Application.Activities.DTOs;
 global using Application.Activities.Validations;
 global using FluentValidation;
 global using API.Middleware;
+global using System.Text.Json;
