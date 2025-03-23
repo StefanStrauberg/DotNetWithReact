@@ -1,5 +1,3 @@
-using Application.Core;
-
 namespace Application.Activities.Queries;
 
 public class GetActivitiesDetails
@@ -17,6 +15,7 @@ public class GetActivitiesDetails
       var activity = await context.Activities
                                   .FindAsync([request.Id],
                                              cancellationToken);
+                                             
       if (activity is null) 
         return Result<Activity>.Failure("Activity not found", 404);
 

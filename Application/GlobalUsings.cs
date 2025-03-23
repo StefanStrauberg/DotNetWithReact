@@ -6,3 +6,4 @@ global using AutoMapper;
 global using Application.Activities.DTOs;
 global using Application.Activities.Commands;
 global using FluentValidation;
+global using Application.Core;
