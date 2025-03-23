@@ -9,7 +9,7 @@ public class ActivitiesController : BaseApiController
   [HttpGet("{id}")]
   public async Task<ActionResult<Activity>> GetActivityDetail(string id,
                                                               CancellationToken token)
-   => await Mediator.Send(new GetActivitiesDetails.Query { Id = id }, token);
+    => HandleResult(await Mediator.Send(new GetActivitiesDetails.Query { Id = id }, token));
 
   [HttpPost]
   public async Task<ActionResult<string>> CreateActivity(CreateActivityDto activityDto,
