@@ -1,4 +1,3 @@
-
 namespace API.Middleware;
 
 public class ExceptionMiddleware : IMiddleware
@@ -21,8 +20,8 @@ public class ExceptionMiddleware : IMiddleware
         }
     }
 
-    private async Task HandleValidationEsxception(HttpContext context,
-                                                  ValidationException ex)
+    private static async Task HandleValidationEsxception(HttpContext context,
+                                                         ValidationException ex)
     {
         var validationErrors = new Dictionary<string, string[]>();
 
