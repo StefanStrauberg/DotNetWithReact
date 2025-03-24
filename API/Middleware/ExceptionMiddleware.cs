@@ -4,6 +4,11 @@ public class ExceptionMiddleware(ILogger<ExceptionMiddleware> logger,
                                  IHostEnvironment env) 
     : IMiddleware
 {
+    static readonly JsonSerializerOptions _jsonOptions = new()
+    {
+        PropertyNamingPolicy = JsonNamingPolicy.CamelCase
+    };
+
     public async Task InvokeAsync(HttpContext context,
                                   RequestDelegate next)
     {
@@ -22,27 +27,29 @@ public class ExceptionMiddleware(ILogger<ExceptionMiddleware> logger,
         }
     }
 
-    private async Task HandleException(HttpContext context,
-                                       Exception ex)
+    bool IsDevelopment() => env.IsDevelopment();
+
+    async Task HandleException(HttpContext context,
+                               Exception ex)
     {
-        logger.LogError(ex, ex.Message);
+        logger.LogError(ex, "An error occurred: {ErrorMessage}", ex.Message);
         context.Response.ContentType = "application/json";
         context.Response.StatusCode = StatusCodes.Status500InternalServerError;
 
-        var response = env.IsDevelopment()
-            ? new AppException(context.Response.StatusCode, ex.Message, ex.StackTrace)
-            : new AppException(context.Response.StatusCode, ex.Message, null);
-        var options = new JsonSerializerOptions
-        {
-            PropertyNamingPolicy = JsonNamingPolicy.CamelCase
-        };
-        var json = JsonSerializer.Serialize(response, options);
+        var response = IsDevelopment()
+            ? new AppException(context.Response.StatusCode,
+                               ex.Message,
+                               ex.StackTrace)
+            : new AppException(context.Response.StatusCode,
+                               ex.Message,
+                               null);
+        var json = JsonSerializer.Serialize(response, _jsonOptions);
 
         await context.Response.WriteAsync(json);
     }
 
-    private static async Task HandleValidationEsxception(HttpContext context,
-                                                         ValidationException ex)
+    static async Task HandleValidationEsxception(HttpContext context,
+                                                 ValidationException ex)
     {
         var validationErrors = new Dictionary<string, string[]>();
 
