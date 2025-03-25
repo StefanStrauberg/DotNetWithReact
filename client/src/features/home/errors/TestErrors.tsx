@@ -1,4 +1,4 @@
-import { Button, ButtonGroup, Typography } from "@mui/material";
+import { Alert, Button, ButtonGroup, Typography } from "@mui/material";
 import { useMutation } from "@tanstack/react-query";
 import { useState } from "react";
 import agent from "../../../lib/api/agent";
@@ -52,17 +52,11 @@ export default function TestErrors() {
         </Button>
       </ButtonGroup>
 
-      {/* Display validation errors */}
-      {validationErrors.length > 0 && (
-        <div style={{ marginTop: "16px", color: "red" }}>
-          <Typography variant="h6">Validation Errors:</Typography>
-          <ul>
-            {validationErrors.map((error, index) => (
-              <li key={index}>{error}</li>
-            ))}
-          </ul>
-        </div>
-      )}
+      {validationErrors.map((err, i) => (
+        <Alert key={i} severity="error">
+          {err}
+        </Alert>
+      ))}
     </>
   );
 }
