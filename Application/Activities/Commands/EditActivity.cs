@@ -4,7 +4,7 @@ public class EditActivity
 {
   public class Command : IRequest<Result<Unit>>
   {
-    public required Activity Activity { get; set; }
+    public required EdtiActivityDto ActivityDto { get; set; }
   }
 
   public class Handler(AppDbContext context,
@@ -15,13 +15,13 @@ public class EditActivity
                                            CancellationToken cancellationToken)
     {
       var activity = await context.Activities
-                                  .FindAsync([request.Activity.Id],
+                                  .FindAsync([request.ActivityDto.Id],
                                              cancellationToken);
 
       if (activity is null)
         return Result<Unit>.Failure("Activity not found", 404);
 
-      mapper.Map(request.Activity, activity);
+      mapper.Map(request.ActivityDto, activity);
 
       var result = await context.SaveChangesAsync(cancellationToken) > 0;
 
