@@ -1,7 +1,7 @@
 namespace Application.Activities.Validations;
 
-public class BaseActivityValidator<T, TDto> : AbstractValidator<T> where TDto 
-    : BaseActivityDto
+public class BaseActivityValidator<T, TDto> 
+    : AbstractValidator<T> where TDto : BaseActivityDto
 {
     public BaseActivityValidator(Func<T, TDto> selector)
     {
