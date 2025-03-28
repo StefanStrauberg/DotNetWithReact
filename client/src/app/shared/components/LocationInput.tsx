@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import {
   FieldValues,
   useController,
@@ -23,9 +23,18 @@ export default function LocationInput<T extends FieldValues>(props: Props<T>) {
   const { field, fieldState } = useController({ ...props });
   const [loading, setLoading] = useState(false);
   const [suggestions, setSuggestions] = useState<LocationIQSuggestion[]>([]);
+  const [inputValue, setInputValue] = useState(field.value || "");
+
+  useEffect(() => {
+    if (field.value && typeof field.value === "object") {
+      setInputValue(field.value.venue || "");
+    } else {
+      setInputValue(field.value || "");
+    }
+  }, [field.value]);
 
   const locationUrl =
-    "https://us1.locationiq.com/v1/search?key=pk.7998560acd397ff9e0b14d672da1e3af&limit=5&dedupe=1&";
+    "https://us1.locationiq.com/v1/autocomplete?key=pk.7998560acd397ff9e0b14d672da1e3af&limit=5&dedupe=1&";
 
   const fetchSuggestions = useMemo(
     () =>
@@ -38,7 +47,7 @@ export default function LocationInput<T extends FieldValues>(props: Props<T>) {
 
         try {
           const res = await axios.get<LocationIQSuggestion[]>(
-            `${locationUrl}q=${query}&`
+            `${locationUrl}q=${query}`
           );
           setSuggestions(res.data);
         } catch (error) {
@@ -55,10 +64,25 @@ export default function LocationInput<T extends FieldValues>(props: Props<T>) {
     await fetchSuggestions(value);
   };
 
+  const handleSelect = (location: LocationIQSuggestion) => {
+    const city =
+      location.address?.city ||
+      location.address?.town ||
+      location.address?.village;
+    const venue = location.display_name;
+    const latitude = location.lat;
+    const longitude = location.lon;
+
+    setInputValue(venue);
+    field.onChange({ city, venue, latitude, longitude });
+    setSuggestions([]);
+  };
+
   return (
     <Box>
       <TextField
         {...props}
+        value={inputValue}
         onChange={(e) => handleChange(e.target.value)}
         fullWidth
         variant="outlined"
@@ -72,7 +96,7 @@ export default function LocationInput<T extends FieldValues>(props: Props<T>) {
             <ListItemButton
               divider
               key={suggestion.place_id}
-              onClick={() => {}}
+              onClick={() => handleSelect(suggestion)}
             >
               {suggestion.display_name}
             </ListItemButton>
