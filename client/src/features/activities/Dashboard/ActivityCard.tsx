@@ -9,7 +9,7 @@ import {
   Divider,
   Typography,
 } from "@mui/material";
-import { Activity } from "../../../lib/types/Activity";
+import { Activity } from "../../../lib/types";
 import { Link } from "react-router";
 import { AccessTime, Place } from "@mui/icons-material";
 import { formatDate } from "../../../lib/util/util";

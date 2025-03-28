@@ -1,5 +1,5 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { Activity } from "../types/Activity";
+import { Activity } from "../types";
 import agent from "../api/agent";
 import { useLocation } from "react-router";
 

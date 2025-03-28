@@ -1,6 +1,6 @@
 import { Card, Badge, CardMedia, Box, Typography, Button } from "@mui/material";
 import { Link } from "react-router";
-import { Activity } from "../../../lib/types/Activity";
+import { Activity } from "../../../lib/types";
 import { formatDate } from "../../../lib/util/util";
 
 type Props = {
